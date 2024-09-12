@@ -129,9 +129,6 @@ const DashProfile = () => {
   };
   const handleSignOut = async () => {
     try {
-      const token = Cookies.get("asblog_token");
-      console.log(token);
-
       dispatch(signoutStart());
       const res = await api.post(
         import.meta.env.VITE_USER_SIGN_OUT,
@@ -144,7 +141,6 @@ const DashProfile = () => {
       );
       if (res.status == 200) {
         toast.success(res.data.message);
-        Cookies.remove("asblog_token");
         setTimeout(() => {
           dispatch(signoutSuccess());
         }, 3000);

@@ -6,7 +6,6 @@ import HamburgerMenu from "./HamburgerMenu";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { toggleTheme } from "../redux/theme/themeSlice.js";
-import Cookies from "js-cookie";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +15,6 @@ const Header = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const { theme } = useSelector((state) => state.theme);
-  const token = Cookies.get("asblog_token");
   const path = location.pathname;
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -89,7 +87,7 @@ const Header = () => {
               <FaSun className="text-black dark:text-white" />
             )}
           </Button>
-          {currentUser && token ? (
+          {currentUser ? (
             <div className="relative cursor-pointer">
               {currentUser.user.profilePicture ? (
                 <img

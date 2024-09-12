@@ -5,7 +5,6 @@ import { signInSuccess, signInFailure } from "../redux/user/userSlice";
 import { useApi } from "../context/ApiContext";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 
 const OAuth = () => {
@@ -37,11 +36,7 @@ const OAuth = () => {
       if (res.status === 200) {
         let resData = jwtDecode(res.data.asblog_token);
         dispatch(signInSuccess(resData));
-        Cookies.set("asblog_token", res.data.asblog_token, {
-          expires: 1 / 24,
-          // httpOnly: true,
-          secure: true,
-        });
+
         toast.success(res.data.message || "SignedIn Success!");
         setTimeout(() => {
           navigate("/dashboard?tab=profile");
