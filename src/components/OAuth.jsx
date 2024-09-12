@@ -37,7 +37,11 @@ const OAuth = () => {
       if (res.status === 200) {
         let resData = jwtDecode(res.data.asblog_token);
         dispatch(signInSuccess(resData));
-        Cookies.set("asblog_token", res.data.asblog_token);
+        Cookies.set("asblog_token", res.data.asblog_token, {
+          expires: 1 / 24,
+          // httpOnly: true,
+          secure: true,
+        });
         toast.success(res.data.message || "SignedIn Success!");
         setTimeout(() => {
           navigate("/dashboard?tab=profile");

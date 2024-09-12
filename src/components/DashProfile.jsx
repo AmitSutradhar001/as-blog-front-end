@@ -129,6 +129,9 @@ const DashProfile = () => {
   };
   const handleSignOut = async () => {
     try {
+      const token = Cookies.get("asblog_token");
+      console.log(token);
+
       dispatch(signoutStart());
       const res = await api.post(
         import.meta.env.VITE_USER_SIGN_OUT,
